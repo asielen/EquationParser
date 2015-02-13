@@ -1,7 +1,8 @@
 # Project Description:
 # For fun I decided to try to port a general equation parser from Ruby to Python to learn the theory behind it
 # I had never looked at or used Ruby before so that was a learning experience in itself.
-# Project time: ~8 hours over two days
+# This was also my first dive into unit tests
+# Project time: ~8 hours over two days (1/30/15)
 #
 # Project Overview:
 # The original one supported toe following syntax:
