@@ -93,5 +93,41 @@ class ParserTest(unittest.TestCase):
         with self.assertRaises(SyntaxError):
             solve('((9)) * ((1)')
 
+    def test_mod(self):
+        self.assertEqual(solve('12%2'), 0)
+        self.assertEqual(solve('16%12'), 4)
+        self.assertEqual(solve('127%59'), 9)
+
+    def test_power(self):
+        self.assertEqual(solve('2^3'), 8)
+        self.assertEqual(solve('(2)^(3)'), 8)
+        self.assertEqual(solve('2^(1+2)+3'), 11)
+
+    def test_power2(self):
+        self.assertEqual(solve('pow(2,3)'), 8)
+        self.assertEqual(solve('-pow(2,3)'), -8)
+        self.assertEqual(solve('pow(2,3)*2'), 16)
+        self.assertEqual(solve('pow( 2 , 3)'), 8)
+        self.assertEqual(solve('(pow(2,3))'), 8)
+        self.assertEqual(solve('80 / pow(2,3)'), 10)
+        self.assertEqual(solve('pow((2),(3))'), 8) # need to make it parse all parameters
+        self.assertEqual(solve('pow(pow(2,2),pow(2,2))'),256)
+        self.assertEqual(solve('pow(pow(2,2),pow(2,2))+pow(2,2)'), 260)
+
+    def test_bad_function(self):
+        with self.assertRaises(SyntaxError):
+            solve('pow')
+        with self.assertRaises(SyntaxError):
+            solve('pow(')
+        with self.assertRaises(SyntaxError):
+            solve('pow()')
+
+    def test_sqrt(self):
+        self.assertEqual(solve('sqrt(4)'), 2)
+        self.assertEqual(solve('sqrt(144)'), 12)
+
+    def test_log(self):
+        pass
+
 if __name__ == "__main__":
     unittest.main()
